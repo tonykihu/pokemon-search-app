@@ -16,7 +16,8 @@ const details = document.getElementById('details');
 
 
 searchButton.addEventListener('click', () => {
-    const searchValue = searchInput.value.trim();
+    const searchValueInput = searchInput.value.trim();
+    const searchValue = pokemonNameFormat(searchValueInput);
     if (searchValue) {
         const searchUrl = `https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/${searchValue}`;
         fetch(searchUrl)
@@ -51,3 +52,21 @@ searchButton.addEventListener('click', () => {
         details.style.display = "block";
     }
 });
+
+function pokemonNameFormat(name) {
+    name = name.toLowerCase();
+
+    name = name.replace(/[^a-z0-9]/g, '');
+
+    if (name.includes("♀")) {
+        name = name.replace("♀","").trim() + "-f";
+    }   else if (name.includes("♂")) {
+        name = name.replace("♂","").trim() + "-m";
+    }
+
+    name = name.replace(/-+/g, "-");
+
+    name = name.replace(/^-|-$/g, "");
+
+    return name;
+};
