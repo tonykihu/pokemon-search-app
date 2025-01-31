@@ -24,7 +24,8 @@ function displayTypes(data) {
      typeNames.forEach(type => {
     const typeElement = document.createElement('div');
     typeElement.textContent = type.toUpperCase();
-    typesContainer.appendChild(typeElement);
+    typeElement.id = 'type-div';
+    types.appendChild(typeElement);
   });
 }
 
@@ -32,6 +33,8 @@ searchButton.addEventListener('click', () => {
     const searchValueInput = searchInput.value.trim();
     const searchValue = pokemonNameFormat(searchValueInput);
     if (searchValue) {
+        searchButton.textContent = 'Loading...';
+        searchButton.disabled = true;
         const searchUrl = `https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/${searchValue}`;
         fetch(searchUrl)
             .then(response => {
@@ -46,7 +49,7 @@ searchButton.addEventListener('click', () => {
                 pokemonId.textContent = data.id;
                 weight.textContent = data.weight;
                 height.textContent = data.height;
-                types.textContent = displayTypes(data); //data.types.map(type => type.type.name).join(', ').toUpperCase();
+                displayTypes(data); //data.types.map(type => type.type.name).join(', ').toUpperCase();
                 hp.textContent = data.stats.find(stat => stat.stat.name === 'hp').base_stat;
                 attack.textContent = data.stats.find(stat => stat.stat.name === 'attack').base_stat;
                 defense.textContent = data.stats.find(stat => stat.stat.name === 'defense').base_stat;
@@ -55,6 +58,10 @@ searchButton.addEventListener('click', () => {
                 speed.textContent = data.stats.find(stat => stat.stat.name === 'speed').base_stat;
                 details.style.display = "block";
 
+            })
+            .finally(() => {
+                searchButton.textContent = 'Search';
+                searchButton.disabled = false;
             });
     } else if (searchValue == "") {
         alert("Please enter a Pokémon name or ID");
