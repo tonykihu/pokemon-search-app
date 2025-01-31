@@ -49,7 +49,7 @@ searchButton.addEventListener('click', () => {
                 pokemonId.textContent = data.id;
                 weight.textContent = data.weight;
                 height.textContent = data.height;
-                displayTypes(data); //data.types.map(type => type.type.name).join(', ').toUpperCase();
+                displayTypes(data);
                 hp.textContent = data.stats.find(stat => stat.stat.name === 'hp').base_stat;
                 attack.textContent = data.stats.find(stat => stat.stat.name === 'attack').base_stat;
                 defense.textContent = data.stats.find(stat => stat.stat.name === 'defense').base_stat;
