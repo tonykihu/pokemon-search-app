@@ -14,6 +14,19 @@ const specialDefense = document.getElementById('special-defense');
 const speed = document.getElementById('speed');
 const details = document.getElementById('details');
 
+function clearTypes() {
+    types.innerHTML = '';
+}
+
+function displayTypes(data) {
+    clearTypes();
+  const typeNames = data.types.map(type => type.type.name);
+     typeNames.forEach(type => {
+    const typeElement = document.createElement('div');
+    typeElement.textContent = type.toUpperCase();
+    typesContainer.appendChild(typeElement);
+  });
+}
 
 searchButton.addEventListener('click', () => {
     const searchValueInput = searchInput.value.trim();
@@ -23,17 +36,17 @@ searchButton.addEventListener('click', () => {
         fetch(searchUrl)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    alert("Pokémon not found");
                 }
                 return response.json();
             })
             .then(data => {
-                pokemonName.textContent = `NAME: ${data.name.toUpperCase()}`;
-                
+                pokemonName.textContent = data.name.toUpperCase();
+                pokemonImage.src = data.sprites.front_default;
                 pokemonId.textContent = data.id;
                 weight.textContent = data.weight;
                 height.textContent = data.height;
-                types.textContent = data.types.map(type => type.type.name).join(', ').toUpperCase();
+                types.textContent = displayTypes(data); //data.types.map(type => type.type.name).join(', ').toUpperCase();
                 hp.textContent = data.stats.find(stat => stat.stat.name === 'hp').base_stat;
                 attack.textContent = data.stats.find(stat => stat.stat.name === 'attack').base_stat;
                 defense.textContent = data.stats.find(stat => stat.stat.name === 'defense').base_stat;
@@ -42,14 +55,11 @@ searchButton.addEventListener('click', () => {
                 speed.textContent = data.stats.find(stat => stat.stat.name === 'speed').base_stat;
                 details.style.display = "block";
 
-            })
-            .catch(error => {
-                details.innerHTML = `<p>Error: ${error.message}</p>`;
-                details.style.display = "block";
             });
+    } else if (searchValue == "") {
+        alert("Please enter a Pokémon name or ID");
     } else {
-        details.innerHTML = "<p>Please enter a Pokémon name or ID.</p>";
-        details.style.display = "block";
+        clearTypes();
     }
 });
 

@@ -8,23 +8,59 @@
 </head>
 <body>
     <h1>Pokemon Search App</h1>
-    <div id="container">
+    <div id="search">
         <input id="search-input" required></input>
         <button id="search-button">Search</button>
     </div>
-    <div id="details">
-        <p id="pokemon-name">Name: </p>
-        <img id="sprite" src="front_default"></img>
-        <p id="pokemon-id">ID: </p>
-        <p id="weight">Weight: </p>
-        <p id="height">Height: </p>
-        <p id="types">Types: </p>
-        <p id="hp">HP: </p>
-        <p id="attack">Attack: </p>
-        <p id="defense">Defense: </p>
-        <p id="special-attack">Special Attack: </p>
-        <p id="special-defense">Special Defense: </p>
-        <p id="speed">Speed: </p>
+    <div id="details-container">
+        <div class="details">
+            <label for="pokemon-name">Name:</label>
+            <p id="pokemon-name"></p>
+        </div>
+        <div class="details">
+            <label for="sprite">Image:</label>
+            <img alt="" id="sprite"></img>
+        </div>
+        <div class="details">
+            <label for="pokemon-id">ID:</label>
+            <p id="pokemon-id"></p>
+        </div>
+        <div class="details">
+            <label for="weight">Weight:</label>
+            <p id="weight"></p>
+        </div>
+        <div class="details">
+            <label for="height">Height:</label>
+            <p id="height"></p>
+        </div>
+        <div class="details">
+            <label for="types">Types:</label>
+            <p id="types"></p>
+        </div>
+        <div class="details">
+            <label for="hp">HP:</label>
+            <p id="hp"></p>
+        </div>
+        <div class="details">
+            <label for="attack">Attack:</label>
+            <p id="attack"> </p>
+        </div>
+        <div class="details">
+            <label for="defense">Defense:</label>
+            <p id="defense"></p>
+        </div>
+        <div class="details">
+            <label for="special-attack">Special Attack:</label>
+            <p id="special-attack"></p>
+        </div>
+        <div class="details">
+            <label for="special-defense">Special Defense:</label>
+            <p id="special-defense"></p>
+        </div>
+        <div class="details">
+            <label for="speed">Speed:</label>
+            <p id="speed"></p>
+        </div>
     </div>
 </body>
 <script src="script.js"></script>
